@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const externalUrl = process.env.RENDER_EXTERNAL_URL;
+const port = externalUrl && process.env.PORT ? parseInt(process.env.PORT) : 3000
 const { auth, requiresAuth } = require('express-openid-connect');
 const fs = require('fs')
 const bodyParser = require('body-parser')
@@ -17,7 +18,7 @@ const config = {
   authRequired : false,
   idpLogout : true, //login not only from the app, but also from identity provider
   secret: process.env.SECRET,
-  baseURL: `http://localhost:${port}`,
+  baseURL: externalUrl || `https://localhost:${port}`,
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: 'https://dev-mlhpkl87steqsy2q.eu.auth0.com',
   clientSecret: process.env.CLIENT_SECRET,
@@ -115,6 +116,15 @@ app.post("/ba/login", async (req, res) => {
   
 });
 
-app.listen(port, () => {
-  console.log("Started on port: " + port);
-});
+if (externalUrl) {
+  const hostname = '127.0.0.1';
+  app.listen(port, hostname, () => {
+    console.log(`Server locally running at http://${hostname}:${port}/ and from
+  outside on ${externalUrl}`);
+  });
+} else {
+  app.listen(port, () => {
+    console.log("Started on port: " + port);
+  });
+}
+
