@@ -6,7 +6,7 @@ require('dotenv').config();
 const pool = new Pool({
     user: process.env.DBUSER,
     host: process.env.DBHOST,
-    database: 'web2-projekt2',
+    database: process.env.DBNAME,
     password: process.env.DBPASSWORD,
     port: 5432,
 });
