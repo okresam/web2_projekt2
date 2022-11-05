@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <%- include('head') %>
+
+    <body>
+        <button class="btn btn-primary" onclick="window.location.href = '/'">Povratak</button>
+        <h5>Korisnik: <%= user.name %></h5>
+        <button class="btn btn-primary" onclick="window.location.href = '/logout'">Odjava</button>
+        <div class="container mb-3">
+            <h3>Komentari:</h3>
+            <% for (let i = 0; i < komentari.length; i++) { %>
+                <div class="container p-1" style="background-color: lightgrey; border-style: solid; border-width: 1px">
+                    <h6><%= komentari[i].korisnik %> - <%= komentari[i].vrijeme %> :</h6>
+                    <% if (xss == 'vulnerability-enabled') { %>
+                        <p><%- komentari[i].komentar %></p>
+                    <% } else { %>
+                        <p><%= komentari[i].komentar %></p>
+                    <% } %>
+                </div>
+            <% } %>
+            <div class="row m-1">
+                <div class="col">
+                    <form action='/xss' method="POST">
+                        <input type='text' name="komentar" />
+                        <input type="submit" class="btn btn-primary" value="Dodaj komentar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

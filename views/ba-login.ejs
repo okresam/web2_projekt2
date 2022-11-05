@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<%- include('head') %>
+
+    <body>
+        <div class="container mb-3">
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Povratak</button>
+            <section class="vh-100 gradient-custom">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                                <div class="card-body p-5 text-center">
+                    
+                                    <% if (message) { %>
+                                        <div>
+                                            <p class="text-warning"><%= message %></p>
+                                        </div>
+                                    <% } %>
+                                    <form action='/ba/login' method="POST">
+                                        <div class="mb-md-5 mt-md-4 pb-5">
+                    
+                                            <h2 class="fw-bold mb-2 text-uppercase">Prijavi se</h2>
+                                            <p class="text-white-50 mb-5">Unesite email i lozinku!</p>
+                    
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                                                <label class="form-label" for="email">Email</label>
+                                            </div>
+                    
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                                                <label class="form-label" for="password">Lozinka</label>
+                                            </div>
+                                            <input type="text" name="ba" value="<%= ba %>" hidden />
+                                            <button class="btn btn-outline-light btn-lg px-5" type="submit">Prijava</button>
+                    
+                                        </div>
+                                    </form>
+
+                                    <div>
+                                        <p class="mb-0">Nemate račun?<a href="/ba/register?ba=<%= ba %>"
+                                                class="text-white-50 fw-bold"> Registriraj se</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+
+</html>

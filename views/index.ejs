@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<%- include('head') %>
+
+    <body>
+        <div class="container mb-3">
+            <h3>Početna stranica</h3>
+            <form action='/xss' method="GET" id="xss-form">
+                <select name="xss" id="xss" form="xss-form">
+                    <option value="vulnerability-enabled" selected>Omogućena ranjivost</option>
+                    <option value="vulnerability-disabled">Onemogućena ranjivost</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Cross-site scripting (XSS)">
+            </form>
+            <br /><br />
+            <form action='/ba/login' method="GET" id="ba-form">
+                <select name="ba" id="ba" form="ba-form">
+                    <option value="vulnerability-enabled" selected>Omogućena ranjivost</option>
+                    <option value="vulnerability-disabled">Onemogućena ranjivost</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Loša autentifikacija (Broken Authentication)">
+            </form>
+        </div>
+    </body>
+
+</html>
